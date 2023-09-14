@@ -1,0 +1,8 @@
+<launch>
+
+    <!-- TRO -->
+    <node pkg="tro" type="tro" name="tro" output="screen"/>
+    <rosparam file="$(find tro)/params/tro.yaml" subst_value="True" ns="tro"/>
+
+
+</launch>

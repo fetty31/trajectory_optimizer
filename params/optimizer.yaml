@@ -1,0 +1,36 @@
+# OPTMIZER params:
+
+  # Parameters:
+dRd: 1
+dRa: 0.3
+m: 240
+I: 93
+Lf: 0.708
+Lr: 0.882
+Dr: 2800 #3152.3 
+Df: 2400 #2785.4
+Cr: 1.6
+Cf: 1.6
+Br: 10.1507 
+Bf: 10.8529 
+u_r: 0.45
+gravity: 9.81
+Cd: 0.8727
+rho: 1.255
+Ar: 1
+q_slip: 0.1
+p_long: 2
+q_n: 0.1
+q_mu: 0.5
+lambda: 0.5
+q_s: 1.0
+
+curvatureStride: 10 # Discretization of middle trajectory's curvature
+
+horizonLength: 0 # (if > 0) it sets the horizon length of the NLOP --> curvatureStride won't be used
+
+debugging: false # debug flag (if true debug function is called)
+
+  # Paths:
+curvaturePath: $(find tro)/data/curvature.csv   # only input of TROsolver (curvature of midline track)
+savePath: $(find tro)/data/                     # path where output is saved 

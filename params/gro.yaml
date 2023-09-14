@@ -1,0 +1,16 @@
+# GRO PARAMETERS:
+
+  #do not modify
+securityFactor: 2.0
+
+  #RVIZ
+visualization: false # if true, gro path is published 
+
+  # modify for better spline interpolation
+separation: 4.0 # Separation between gates [m]
+spacing: 0.05 # Spacing between points [m] (discretization of trajectory)
+
+  # paths
+midlinePath: $(find urinay)/loops/loop.unay
+savePath: $(find tro)/data/
+

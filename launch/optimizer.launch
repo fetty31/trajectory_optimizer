@@ -1,0 +1,11 @@
+<launch>
+
+    <!-- OPTIMIZER -->
+    <node pkg="tro" type="optimizer" name="optimizer" output="screen"/>
+    <rosparam file="$(find tro)/params/optimizer.yaml" subst_value="True" ns="optimizer"/>
+
+    <!-- TIMEOUT + TRO -->
+    <!-- <node pkg="timed_roslaunch" type="timed_roslaunch.sh"
+        args="2 tro tro.launch" name="timed_roslaunch_tro" output="screen" /> -->
+
+</launch>

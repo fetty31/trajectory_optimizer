@@ -1,0 +1,20 @@
+# TRO params:
+splinesStride: 15   # Stride for calculating less splines (smaller computing time)
+Tmiddle: 0.05       # discretization of middle trajectory
+firstSpId: 0        # (if > 0) == index+1 to interpolate with join_track() to compute first polynomial
+v0: 6               # heuristic parameter representing the velocity of the spline 
+
+# Paths:
+optimizedPath: $(find tro)/data/x_opt.csv
+problemPath: $(find tro)/data/problem.csv
+middlePointsPath: $(find tro)/data/midline_points.csv
+freeSpacePath: $(find tro)/data/freeSpace.csv
+
+# Topics:
+plannerTopic: /AS/C/trajectory/full
+pathTopic: /AS/C/path
+conesTopic: /AS/C/vis/tro/cones
+stateCarTopic: /AS/C/state
+FirstpathTopic: /gro/first
+
+conesPath: $(find urinay)/loops/loop.unay # Visualization purposes
