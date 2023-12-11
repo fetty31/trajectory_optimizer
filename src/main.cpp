@@ -7,22 +7,22 @@ ros::Publisher troPath, troFirstPath, troPlanner;
 ros::Publisher pubConesLoopMA;
 
 // TRO is initialized here
-TRO TROobject;
+TRO TROobj;
 
 // This is the planner callback
 void callback_planner(const as_msgs::CarState::ConstPtr &data){
 
     // Don't do anything until the TRO is initialized
-    if (TROobject.isRunning()){
+    if (TROobj.isRunning()){
         
-        if(!TROobject.firstSpFlag) TROobject.join_track(data);
-        as_msgs::ObjectiveArrayCurv msgCurv = TROobject.plannerTRO(data);
+        if(!TROobj.firstSpFlag) TROobj.join_track(data);
+        as_msgs::ObjectiveArrayCurv msgCurv = TROobj.plannerTRO(data);
         troPlanner.publish(msgCurv);
 
         // Visualization of the path
-        troPath.publish(TROobject.get_path());
-        troFirstPath.publish(TROobject.get_Firstpath());
-        TROobject.pubMarkerArray(TROobject.read_cones(TROobject.conesPath), pubConesLoopMA);
+        troPath.publish(TROobj.get_path());
+        troFirstPath.publish(TROobj.get_Firstpath());
+        TROobj.pubMarkerArray(TROobj.read_cones(TROobj.conesPath), pubConesLoopMA);
     }
 }
 
@@ -33,28 +33,30 @@ int main(int argc, char **argv){
     ros::init(argc, argv, "tro");
 
     // Handle Connections:
-    ros::NodeHandle nh;
+    ros::NodeHandle nh("~");
 
     // Topics
     string plannerTopic, pathTopic, FirstpathTopic, conesTopic, stateCarTopic;
 
     // Setting params from yaml
-    nh.getParam("/tro/optimizedPath", TROobject.optimizedPath);
-    nh.getParam("/tro/problemPath", TROobject.problemPath);
-    nh.getParam("/tro/middlePointsPath", TROobject.middlePointsPath);
-    nh.getParam("/tro/freeSpacePath", TROobject.freeSpacePath);
+    nh.param<string>("Paths/Optimized",     TROobj.optimizedPath,    "");
+    nh.param<string>("Paths/Problem",       TROobj.problemPath,      "");
+    nh.param<string>("Paths/MiddlePoints",  TROobj.middlePointsPath, "");
+    nh.param<string>("Paths/FreeSpace",     TROobj.freeSpacePath,    "");
 
-    nh.getParam("/tro/splinesStride", TROobject.splinesStride);
-    nh.getParam("/tro/Tmiddle", TROobject.Tmiddle);
-    nh.getParam("/tro/conesPath", TROobject.conesPath);
-    nh.getParam("/tro/firstSpId", TROobject.firstSpId);
-    nh.getParam("/tro/v0", TROobject.v0);
+    nh.param<int>("splinesStride",  TROobj.splinesStride,    12);
+    nh.param<int>("firstSpId",      TROobj.firstSpId,        0);
 
-    nh.getParam("/tro/plannerTopic", plannerTopic);
-    nh.getParam("/tro/pathTopic", pathTopic);
-    nh.getParam("/tro/FirstpathTopic", FirstpathTopic);
-    nh.getParam("/tro/conesTopic", conesTopic);
-    nh.getParam("/tro/stateCarTopic", stateCarTopic);
+    nh.param<double>("Tmiddle",     TROobj.Tmiddle,  0.05);
+    nh.param<double>("firstSpId",   TROobj.v0,       0.0);
+
+    nh.param<string>("conesPath", TROobj.conesPath, "");
+
+    nh.param<string>("Topics/Planner",      plannerTopic,   "");
+    nh.param<string>("Topics/Path",         pathTopic,      "");
+    nh.param<string>("Topics/FirstPath",    FirstpathTopic, "");
+    nh.param<string>("Topics/Cones",        conesTopic,     "");
+    nh.param<string>("Topics/StateCar",     stateCarTopic,  "");
 
     // Publishers & Subscribers:
     ros::Subscriber subState = nh.subscribe(stateCarTopic, 1, callback_planner);
@@ -65,16 +67,16 @@ int main(int argc, char **argv){
     pubConesLoopMA = nh.advertise<visualization_msgs::MarkerArray>(conesTopic, 1); // Visualization purposes only
 
     // Initialization of TRO
-    if(not TROobject.isRunning()){
+    if(not TROobj.isRunning()){
 
         // Initialization
-        TROobject.init();
+        TROobj.init();
 
         ros::Duration(1).sleep();
 
         // Visualization of the path
-        troPath.publish(TROobject.get_path());
-        TROobject.pubMarkerArray(TROobject.read_cones(TROobject.conesPath), pubConesLoopMA);
+        troPath.publish(TROobj.get_path());
+        TROobj.pubMarkerArray(TROobj.read_cones(TROobj.conesPath), pubConesLoopMA);
 
     }
 

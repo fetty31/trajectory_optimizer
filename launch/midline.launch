@@ -1,10 +1,11 @@
 <launch>
 
     <!-- TRO -->
-    <node pkg="tro" type="midline" name="midline" output="screen"/>
-    <rosparam file="$(find tro)/params/gro.yaml" subst_value="True" ns="midline"/>
+    <node pkg="trajectory_optimizer" type="midline" name="midline" output="screen">
+        <rosparam file="$(find trajectory_optimizer)/params/gro.yaml" subst_value="True"/>
+    </node>
 
     <!-- <node name="dynamic_reconfigure_load_tro" pkg="dynamic_reconfigure" type="dynparam" 
-          args="load /tro $(find tro)/params/dynamic.yaml" />  -->
+          args="load /trajectory_optimizer $(find trajectory_optimizer)/params/dynamic.yaml" />  -->
 
 </launch>

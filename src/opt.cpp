@@ -1,6 +1,6 @@
 #include "../include/optimizer.hh"
 
-optimizer OPTobject;
+optimizer OPTobj;
 
 int main(int argc, char **argv){
 
@@ -8,42 +8,43 @@ int main(int argc, char **argv){
     ros::init(argc, argv, "optimizer");
 
     // Handle Connections:
-    ros::NodeHandle nh;
+    ros::NodeHandle nh("~");
 
     // Setting params from yaml
-    nh.getParam("/optimizer/curvatureStride", OPTobject.curvatureStride);
-    nh.getParam("/optimizer/debugging", OPTobject.debugging);
-    nh.getParam("/optimizer/curvaturePath", OPTobject.curvaturePath);
-    nh.getParam("/optimizer/savePath", OPTobject.savePath);
+    nh.param<string>("Paths/curvature", OPTobj.curvaturePath, "");
+    nh.param<string>("Paths/save",      OPTobj.savePath,      "");
 
-    nh.getParam("/optimizer/horizonLength", OPTobject.horizonLength);
+    nh.param<bool>("debugging", OPTobj.debugging, false);
 
-    nh.getParam("/optimizer/dRd", OPTobject.dRd);
-    nh.getParam("/optimizer/dRa", OPTobject.dRa);
-    nh.getParam("/optimizer/m", OPTobject.m);
-    nh.getParam("/optimizer/I", OPTobject.I);
-    nh.getParam("/optimizer/Lf", OPTobject.Lf);
-    nh.getParam("/optimizer/Lr", OPTobject.Lr);
-    nh.getParam("/optimizer/Dr", OPTobject.Dr);
-    nh.getParam("/optimizer/Df", OPTobject.Df);
-    nh.getParam("/optimizer/Cr", OPTobject.Cr);
-    nh.getParam("/optimizer/Cf", OPTobject.Cf);
-    nh.getParam("/optimizer/Br", OPTobject.Br);
-    nh.getParam("/optimizer/Bf", OPTobject.Bf);
-    nh.getParam("/optimizer/u_r", OPTobject.u_r);
-    nh.getParam("/optimizer/gravity", OPTobject.gravity);
-    nh.getParam("/optimizer/Cd", OPTobject.Cd);
-    nh.getParam("/optimizer/rho", OPTobject.rho);
-    nh.getParam("/optimizer/Ar", OPTobject.Ar);
-    nh.getParam("/optimizer/q_slip", OPTobject.q_slip);
-    nh.getParam("/optimizer/p_long", OPTobject.p_long);
-    nh.getParam("/optimizer/q_n", OPTobject.q_n);
-    nh.getParam("/optimizer/q_mu", OPTobject.q_mu);
-    nh.getParam("/optimizer/lambda", OPTobject.lambda);
-    nh.getParam("/optimizer/q_s", OPTobject.q_s);
+    nh.param<int>("horizonLength", OPTobj.horizonLength,     0);
+    nh.param<int>("curvatureStride", OPTobj.curvatureStride, 10);
+
+    nh.param<double>("dRd",     OPTobj.dRd,      1.0);
+    nh.param<double>("dRa",     OPTobj.dRa,      0.3);
+    nh.param<double>("m",       OPTobj.m,        240.0);
+    nh.param<double>("Iz",      OPTobj.I,        93.0);
+    nh.param<double>("Lf",      OPTobj.Lf,       0.708);
+    nh.param<double>("Lr",      OPTobj.Lr,       0.882);
+    nh.param<double>("Dr",      OPTobj.Dr,       2800.0);
+    nh.param<double>("Df",      OPTobj.Df,       2400.0);
+    nh.param<double>("Cr",      OPTobj.Cr,       1.6);
+    nh.param<double>("Cf",      OPTobj.Cf,       1.6);
+    nh.param<double>("Br",      OPTobj.Br,       10.1507);
+    nh.param<double>("Bf",      OPTobj.Bf,       10.8529);
+    nh.param<double>("u_r",     OPTobj.u_r,      0.045);
+    nh.param<double>("gravity", OPTobj.gravity,  9.81);
+    nh.param<double>("Cd",      OPTobj.Cd,       0.87);
+    nh.param<double>("rho",     OPTobj.rho,      1.255);
+    nh.param<double>("Ar",      OPTobj.Ar,       1.0);
+    nh.param<double>("q_slip",  OPTobj.q_slip,   0.1);
+    nh.param<double>("p_long",  OPTobj.p_long,   2.0);
+    nh.param<double>("q_n",     OPTobj.q_n,      0.1);
+    nh.param<double>("q_mu",    OPTobj.q_mu,     0.5);
+    nh.param<double>("lambda",  OPTobj.lambda,   0.5);
+    nh.param<double>("q_s",     OPTobj.q_s,      1.0);
 
     // Initialization of OPTIMIZER
-    if(not OPTobject.isRunning()) OPTobject.init();
+    if(not OPTobj.isRunning()) OPTobj.init();
 
     ros::spin();
 

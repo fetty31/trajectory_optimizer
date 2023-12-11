@@ -14,7 +14,7 @@
 #include <ros/console.h>
 #include <dynamic_reconfigure/server.h>
 
-#include "tro/dynamicConfig.h"
+#include "trajectory_optimizer/dynamicConfig.h"
 #include "nav_msgs/Path.h"
 
 #include "as_msgs/ObjectiveArrayCurv.h"
@@ -104,7 +104,7 @@ class GRO{
         as_msgs::Tracklimits read_csv(std::string filename);
         void save_data(std::string filename);
 
-        bool reconfigure (tro::dynamicConfig& config); // Dynamic reconfigure
+        bool reconfigure (trajectory_optimizer::dynamicConfig& config); // Dynamic reconfigure
         void enjoy(); // Speed up
 
         // Trajectory data

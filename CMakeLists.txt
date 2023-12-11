@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.0.2)
-project(tro)
+project(trajectory_optimizer)
 
 set(CMAKE_BUILD_TYPE "Release")
 

@@ -4,17 +4,17 @@ Tmiddle: 0.05       # discretization of middle trajectory
 firstSpId: 0        # (if > 0) == index+1 to interpolate with join_track() to compute first polynomial
 v0: 6               # heuristic parameter representing the velocity of the spline 
 
-# Paths:
-optimizedPath: $(find tro)/data/x_opt.csv
-problemPath: $(find tro)/data/problem.csv
-middlePointsPath: $(find tro)/data/midline_points.csv
-freeSpacePath: $(find tro)/data/freeSpace.csv
+Paths:
+  Optimized: $(find trajectory_optimizer)/data/x_opt.csv
+  Problem: $(find trajectory_optimizer)/data/problem.csv
+  MiddlePoints: $(find trajectory_optimizer)/data/midline_points.csv
+  FreeSpace: $(find trajectory_optimizer)/data/freeSpace.csv
 
-# Topics:
-plannerTopic: /AS/C/trajectory/full
-pathTopic: /AS/C/path
-conesTopic: /AS/C/vis/tro/cones
-stateCarTopic: /AS/C/state
-FirstpathTopic: /gro/first
+Topics:
+  Planner: /AS/C/trajectory/full
+  Path: /AS/C/path
+  Cones: /AS/C/vis/tro/cones
+  StateCar: /AS/C/state
+  Firstpath: /gro/first
 
 conesPath: $(find urinay)/loops/loop.unay # Visualization purposes

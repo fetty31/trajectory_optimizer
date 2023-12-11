@@ -1,7 +1,7 @@
 #include "../include/GRO.hh"
 
 // GRO object is initialized here
-GRO GROobject;
+GRO GROobj;
 
 ros::Publisher groPath;
 
@@ -15,17 +15,19 @@ int main(int argc, char **argv){
     groPath = nh.advertise<nav_msgs::Path>("/gro/path", 1); // Visualization purposes only
 
     // Setting params from yaml
-    nh.getParam("/midline/midlinePath", GROobject.midlinePath);
-    nh.getParam("/midline/savePath", GROobject.savePath);
-    nh.getParam("/midline/spacing", GROobject.spacing);
-    nh.getParam("/midline/separation", GROobject.separation);
-    nh.getParam("/midline/securityFactor", GROobject.securityFactor);
-    nh.getParam("/midline/visualization", GROobject.visualization);
+    nh.param<string>("Paths/midline", GROobj.midlinePath,  "");
+    nh.param<string>("Paths/save",    GROobj.savePath,     "");
+
+    nh.param<double>("spacing",         GROobj.spacing,          0.05);
+    nh.param<double>("separation",      GROobj.separation,       3.0);
+    nh.param<double>("securityFactor",  GROobj.securityFactor,   2.0);
+
+    nh.param<bool>("visualization", GROobj.visualization, false);
 
     // Reading from tracklimits file
     as_msgs::Tracklimits data;
 
-    data = GROobject.read_csv(GROobject.midlinePath);
+    data = GROobj.read_csv(GROobj.midlinePath);
 
     cout << "Left\n";
     for(int i=0; i<data.left.size(); i++){ cout << data.left[i].position_global.x << " " << data.left[i].position_global.y << endl;}
@@ -33,14 +35,14 @@ int main(int argc, char **argv){
     for(int i=0; i<data.right.size(); i++){ cout << data.right[i].position_global.x << " " << data.right[i].position_global.y << endl;}
 
     // Initialization of GRO
-    GROobject.init(data);
+    GROobj.init(data);
 
     // Saving middle trajectory
-    GROobject.save_data(GROobject.savePath);
+    GROobj.save_data(GROobj.savePath);
 
-    if(GROobject.visualization){
+    if(GROobj.visualization){
         ros::Duration(2).sleep();
-        groPath.publish(GROobject.get_path()); // Visualize trajectory in rviz
+        groPath.publish(GROobj.get_path()); // Visualize trajectory in rviz
         ROS_WARN_STREAM("GRO path published in " << groPath.getTopic());
     }
 

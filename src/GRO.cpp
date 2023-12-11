@@ -849,7 +849,7 @@ void GRO::save_data(std::string filename){
 ///////////// Dynamic Reconfigure Parameters ///////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-bool GRO::reconfigure (tro::dynamicConfig& config){
+bool GRO::reconfigure (trajectory_optimizer::dynamicConfig& config){
 
     try{
         this->securityFactor = config.securityFactor;

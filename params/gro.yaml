@@ -10,7 +10,7 @@ visualization: false # if true, gro path is published
 separation: 4.0 # Separation between gates [m]
 spacing: 0.05 # Spacing between points [m] (discretization of trajectory)
 
-  # paths
-midlinePath: $(find urinay)/loops/loop.unay
-savePath: $(find tro)/data/
+Paths:
+  midline: $(find urinay)/loops/loop.unay  # input track
+  save: $(find trajectory_optimizer)/data/
 

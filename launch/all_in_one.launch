@@ -1,14 +1,15 @@
 <launch>
 
     <!-- MIDLINE -->
-    <node pkg="tro" type="midline" name="midline" output="screen"/>
-    <rosparam file="$(find tro)/params/gro.yaml" subst_value="True" ns="midline"/>
+    <node pkg="trajectory_optimizer" type="midline" name="midline" output="screen">
+        <rosparam file="$(find trajectory_optimizer)/params/gro.yaml" subst_value="True"/>
+    </node>
 
     <!-- <node name="dynamic_reconfigure_load_tro" pkg="dynamic_reconfigure" type="dynparam" 
-          args="load /tro $(find tro)/params/dynamic.yaml" />  -->
+          args="load /trajectory_optimizer $(find trajectory_optimizer)/params/dynamic.yaml" />  -->
 
     <!-- TIMEOUT + OPTIMIZER -->
     <node pkg="timed_roslaunch" type="timed_roslaunch.sh"
-            args="2 tro optimizer.launch" name="timed_roslaunch_optimizer" output="screen" />
+            args="2 trajectory_optimizer optimizer.launch" name="timed_roslaunch_optimizer" output="screen" />
 
 </launch>

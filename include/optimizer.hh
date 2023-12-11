@@ -106,10 +106,10 @@ class optimizer{
         bool debugging = false; // if true debug function is called
 
         // Read path
-        string curvaturePath = "/home/fetty/Escritorio/control_ws2021/src/control/tro/data/curvature.csv"; // only input of TROsolver  
+        string curvaturePath = "/data/curvature.csv"; // only input of TROsolver  
 
         // Save paths
-        string savePath = "/home/fetty/Escritorio/control_ws2021/src/control/tro/data/"; // path where output is saved
+        string savePath = "/data/"; // path where output is saved
 
         void init(); // Initialization function
         bool ExitFlag(); // Return true if Solve Succeded

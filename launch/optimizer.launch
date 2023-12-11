@@ -1,8 +1,9 @@
 <launch>
 
     <!-- OPTIMIZER -->
-    <node pkg="tro" type="optimizer" name="optimizer" output="screen"/>
-    <rosparam file="$(find tro)/params/optimizer.yaml" subst_value="True" ns="optimizer"/>
+    <node pkg="trajectory_optimizer" type="optimizer" name="optimizer" output="screen">
+        <rosparam file="$(find trajectory_optimizer)/params/optimizer.yaml" subst_value="True"/>
+    </node>
 
     <!-- TIMEOUT + TRO -->
     <!-- <node pkg="timed_roslaunch" type="timed_roslaunch.sh"
