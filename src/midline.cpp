@@ -11,7 +11,7 @@ int main(int argc, char **argv){
     ros::init(argc, argv, "midline");
 
     // Handle Connections:
-    ros::NodeHandle nh;
+    ros::NodeHandle nh("~");
     groPath = nh.advertise<nav_msgs::Path>("/gro/path", 1); // Visualization purposes only
 
     // Setting params from yaml
