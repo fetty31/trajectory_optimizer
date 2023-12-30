@@ -61,14 +61,14 @@ include_directories(
 
 
 add_executable(${PROJECT_NAME} src/main.cpp 
-                                src/TRO.cpp)
+                                src/utils/TRO.cpp)
 
 add_executable(midline src/midline.cpp
-                        src/GRO.cpp)
+                        src/utils/GRO.cpp)
 
 add_executable(optimizer src/opt.cpp
-                          src/SGSmooth.cpp
-                          src/optimizer.cpp)
+                          src/utils/SGSmooth.cpp
+                          src/utils/optimizer.cpp)
 
 add_dependencies(${PROJECT_NAME} as_msgs_generate_messages_cpp)
                                   
