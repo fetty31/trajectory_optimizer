@@ -42,9 +42,14 @@ For specific information on how the trajectory optimization procedure is done pl
 
 The most important advantage of this optimization algorithm is that it is not based on any geometrical approach, but it tries to find the optimal race line by taking into account the constraints imposed by the dynamic bicycle model. This way, apart from the actual race line, an optimal state for each point of the trajectory is obtained. This means that it also outputs **vx**, **vy** and **yawrate** profiles as well as **steering** and **throttle** commands profiles. 
 
-_TO DO_:
-* _trajectory plots_
-* _vx, vy, w plots_
+FSG2019 track results:
+
+<p float="left">
+  <img src="docs/tro_traj.png" width="315" />
+  <img src="docs/tro_colorplot.png" width="320" />
+</p>
+
+For more results [read this](docs/tfg_oriolmartinez).
 
 ## Workflow
 This pkg includes three different nodes (or executables), which are thought to be run in the following order: 
@@ -53,4 +58,29 @@ This pkg includes three different nodes (or executables), which are thought to b
 * `tro` _(online)_ executable is meant to be executed through [tro.launch](launch/tro.launch). It's the only node thought to run _online_. It reads the Optimization Problem solution and computes the optimal trajectory, as well as interpolating the optimal states, before publishing the partial trajectory data to the ROS network.
 
 ## Parameters
-_Future explanation of all the parameters_
+_Explanation of all the parameters used:_
+| Parameter        | Summary                               | Value [SI]  |
+| ---------------- | ------------------------------------- | ----------- |
+| Q<sub>s</sub>         | Progress rate weight                  | 1.0         |
+| Q<sub>slip</sub>      | Slip difference weight                | 0.1         |
+| R<sub>d</sub>         | Steering rate weight                  | 1.4         |
+| R<sub>a</sub>         | Acceleration rate weight              | 0.3         |
+| R<sub>Mtv</sub>       | Additional moment weight              | 1.0         |
+| B<sub>f</sub>         | Pacejka Constant                      | 10.5507     |
+| B<sub>r</sub>         | Pacejka Constant                      | 10.5507     |
+| C<sub>f</sub>         | Pacejka Constant                      | -1.2705     |
+| C<sub>r</sub>         | Pacejka Constant                      | -1.2705     |
+| D<sub>f</sub>         | Pacejka Constant                      | 2208.0635   |
+| D<sub>r</sub>         | Pacejka Constant                      | 2563.599    |
+| L<sub>f</sub>         | Distance from CoG to front axis       | 0.708       |
+| L<sub>r</sub>         | Distance from CoG to rear axis        | 0.822       |
+| L                     | Total car's length                    | 2.72        |
+| W                     | Total car's width                     | 1.5         |
+| m                     | Car's mass                            | 210.0       |
+| I<sub>z</sub>         | Inertial moment around z axis         | 180.0       |
+| rho<sub>air</sub>     | Air's density                         | 1.255       |
+| A<sub>aero</sub>      | Drag area                             | 1.0         |
+| C<sub>d</sub>         | Drag coefficient                      | 1.2727      |
+| C<sub>motor</sub>     | Motor Constant (max. N)               | 4283.4645   |
+| C<sub>r</sub>         | Rolling resistance (\% of car's weight) | 0.45\%      |
+
