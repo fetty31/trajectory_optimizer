@@ -11,10 +11,7 @@ curvature = curvature(2:end);
 progres = 0:delta_s:delta_s*N;
 
 figure()
-subplot(1,2,1)
 plot(curvature)
-title('Curvature')
-
-subplot(1,2,2)
+hold on
 plot(filtered_curvature)
-title('Filtered Curvature')
+title('Curvature comparison')

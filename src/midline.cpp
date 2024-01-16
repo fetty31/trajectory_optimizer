@@ -46,10 +46,10 @@ int main(int argc, char **argv){
 
     data = GROobj.read_csv(GROobj.midlinePath);
 
-    cout << "Left\n";
-    for(int i=0; i<data.left.size(); i++){ cout << data.left[i].position_global.x << " " << data.left[i].position_global.y << endl;}
-    cout << "Right\n";
-    for(int i=0; i<data.right.size(); i++){ cout << data.right[i].position_global.x << " " << data.right[i].position_global.y << endl;}
+    // cout << "Left\n";
+    // for(int i=0; i<data.left.size(); i++){ cout << data.left[i].position_global.x << " " << data.left[i].position_global.y << endl;}
+    // cout << "Right\n";
+    // for(int i=0; i<data.right.size(); i++){ cout << data.right[i].position_global.x << " " << data.right[i].position_global.y << endl;}
 
     // Initialization of GRO
     GROobj.init(data);

@@ -34,6 +34,9 @@ void TRO::init(){
     get_trajectory();
     radi_curv();
     create_KDTree();
+
+    // Save final trajectory (debug)
+    save_csv(this->savePath);
     
     // Running flag set to true
     isRun = true;
@@ -196,7 +199,7 @@ void TRO::radi_curv(){
         // Parametrization of the spline, numberPointsPerSpline between 0 and almost 1:
         VectorXd t = VectorXd::LinSpaced(numberPointsPerSpline, 0, 1-1/(double)numberPointsPerSpline);
 
-        // Specific coordinates for particular points
+        // Specific coordinates for particular points (evaluate splines)
         points.block(totalPoints, 0, numberPointsPerSpline, 1) = polyval(traj.coefsSplinesTrajX.row(i), t);
         points.block(totalPoints, 1, numberPointsPerSpline, 1) = polyval(traj.coefsSplinesTrajY.row(i), t);
 
@@ -580,6 +583,29 @@ MatrixXd TRO::read_csv(std::string &filename, bool longvec, bool firstout){
     // Close file
     myFile.close();
     return FileContent;
+}
+
+void TRO::save_csv(string filepath){
+    try{
+
+        std::ofstream traj_file;
+        traj_file.open(filepath + "optimal_points.csv", std::ofstream::out | std::ofstream::trunc);
+
+        for(int i=0; i<traj.pointsTraj.rows(); i++){
+            traj_file << traj.pointsTraj(i,0) << ",";
+            traj_file << traj.pointsTraj(i,1) << ",";
+            traj_file << traj.Vx(i) << "\n";
+        }
+
+        // Remeber to close the file!
+        traj_file.close();
+
+        ROS_INFO_STREAM("OPTIMAL TRACK data SAVED AT: " << filepath);
+    }
+    catch (const std::exception& e)
+    {
+        ROS_ERROR_STREAM( "TRO::save_csv Exception was thrown: \n" << e.what() );
+    }
 }
 
 // Auxiliar function: checks whether its time to change the KDTree used by the planner

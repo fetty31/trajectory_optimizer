@@ -1,5 +1,5 @@
 # TRO params:
-splinesStride: 15   # Stride for calculating less splines (smaller computing time)
+splinesStride: 10   # Stride for calculating less splines (smaller computing time)
 Tmiddle: 0.05       # discretization of middle trajectory
 firstSpId: 0        # (if > 0) == index+1 to interpolate with join_track() to compute first polynomial
 v0: 6               # heuristic parameter representing the velocity of the spline 
@@ -9,6 +9,7 @@ Paths:
   Problem: $(find trajectory_optimizer)/data/problem.csv
   MiddlePoints: $(find trajectory_optimizer)/data/midline_points.csv
   FreeSpace: $(find trajectory_optimizer)/data/freeSpace.csv
+  Save: $(find trajectory_optimizer)/data/
 
 Topics:
   Planner: /AS/C/trajectory/full

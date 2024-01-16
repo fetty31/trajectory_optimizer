@@ -102,6 +102,9 @@ class TRO{
         void create_auxKDTree(); // Create aux KDTree for the planner
         void changeKDTree(Point &p); // Checks whether its time to change KDTree
 
+        void save_csv(string filename);
+        MatrixXd read_csv(string &filename, bool longvec=false, bool firstout = false);
+
         bool isRun = false; // Flag of initialization
         bool firstSpDone = false; // Flag for changing from KDTree (first polynomial --> optimal traj)
 
@@ -111,7 +114,6 @@ class TRO{
         double integral_length(Vector4d coefsX, Vector4d coefsY);
         
         MatrixXd coefs_splines(VectorXd x); // returns the coefficients of the splines that interpolates all N points
-        MatrixXd read_csv(string &filename, bool longvec=false, bool firstout = false);
         MatrixXd planning(const as_msgs::CarState::ConstPtr &data); // Prepare msg for plannerTRO()
 
         pair<double,double> coef_bx_by(double angle); // given the angle, calculate the bx and by coefficients of the spline
@@ -125,6 +127,7 @@ class TRO{
         string middlePointsPath; // Middle trajectory points
         string freeSpacePath; // freeR, freeL from middle trajectory 
         string conesPath; // Path of Cones Loop
+        string savePath;
 
         double Tmiddle = 0.05; // discretization of middle trajectory
         double spacing = 0.025; // discretization for MPC

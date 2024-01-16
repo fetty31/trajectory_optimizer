@@ -60,6 +60,7 @@ int main(int argc, char **argv){
     nh.param<string>("Paths/Problem",       TROobj.problemPath,      "");
     nh.param<string>("Paths/MiddlePoints",  TROobj.middlePointsPath, "");
     nh.param<string>("Paths/FreeSpace",     TROobj.freeSpacePath,    "");
+    nh.param<string>("Paths/Save",          TROobj.savePath,         "");
 
     nh.param<int>("splinesStride",  TROobj.splinesStride,    12);
     nh.param<int>("firstSpId",      TROobj.firstSpId,        0);

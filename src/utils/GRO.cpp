@@ -32,13 +32,12 @@ void GRO::init(as_msgs::Tracklimits &data){
     
     // Run all principal functions
     get_data(data);
-    cout << "get data" << endl;
+
     get_trajectory();
-    cout << "get trajectory" << endl;
+
     radi_curv();
-    cout << "radi curv" << endl;
+
     velocity_profile();
-    // create_KDTree();
 
     // Running flag to true
     isRun = true;
@@ -102,8 +101,8 @@ void GRO::get_trajectory(){
 
     traj.pointsSol = (traj.Pleft + traj.Pright)/2;
 
-    cout << "pointsSol\n";
-    cout << traj.pointsSol << endl;
+    // cout << "pointsSol\n";
+    // cout << traj.pointsSol << endl;
 
     // Destroy points that are too close each other
     reduce_points();
@@ -112,11 +111,11 @@ void GRO::get_trajectory(){
     traj.coefsSplinesTrajX = coefs_splines(traj.pointsSol.col(0));
     traj.coefsSplinesTrajY = coefs_splines(traj.pointsSol.col(1));
 
-    cout << "coefsX:\n";
-    cout << traj.coefsSplinesTrajX << endl;
+    // cout << "coefsX:\n";
+    // cout << traj.coefsSplinesTrajX << endl;
 
-    cout << "coefsY\n";
-    cout << traj.coefsSplinesTrajY << endl;
+    // cout << "coefsY\n";
+    // cout << traj.coefsSplinesTrajY << endl;
 
     // Getting the length of every spline of the trajectory
     traj.splinesLengths = VectorXd(traj.N);
@@ -136,9 +135,9 @@ void GRO::radi_curv(){
     // This is the aproximated dimension that will have the vectors
     int aproxL = (int) (traj.splinesLengths.sum()/(this->spacing/2)) + traj.N; // The spacing is divided by 2 for the Runge-Kutta method used after
 
-    cout << "aproxL: " << aproxL << endl;
-    cout << "splinesLengths: " << traj.splinesLengths.sum() << endl;
-    cout << "N: " << traj.N << endl;
+    // cout << "aproxL: " << aproxL << endl;
+    // cout << "splinesLengths: " << traj.splinesLengths.sum() << endl;
+    // cout << "N: " << traj.N << endl;
 
     // Initializing points and radius
     MatrixXd points(aproxL, 2);
