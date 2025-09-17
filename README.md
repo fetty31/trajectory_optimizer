@@ -19,7 +19,7 @@
     </ol>
 </details>
 
-Formula Student model-based trajectory optimization algorithm. This algorithm is shared as part of my [Final Degree Thesis](docs/tfg.pdf). Developed during the 2021-22 Formula Student season, it's an offline trajectory optimization approach relying on a dynamic bicycle model which is avaluated for the whole midline path in order to find the optimal path. This approach can be seen as a one-time MPC execution with an horizon lenght (or prediction horizon) as long as the given midline.
+Formula Student model-based trajectory optimization algorithm. This algorithm is shared as part of my [Final Degree Thesis](https://hdl.handle.net/2117/405362). Developed during the 2021-22 Formula Student season, it's an offline trajectory optimization approach relying on a dynamic bicycle model which is avaluated for the whole midline path in order to find the optimal path. This approach can be seen as a one-time MPC execution with an horizon lenght (or prediction horizon) as long as the given midline.
 
 ## Disclaimer
 This is a tailored motion planning solution developed for CAT14X & CAT15X [BCN eMotorsport](https://bcnemotorsport.upc.edu) cars. If you plan to use this algorithm in any Formula Student Competition the **only** thing I ask for is to **ALWAYS REFERENCE** the team ___BCN eMotorsport___.
@@ -38,7 +38,7 @@ _In order to install casadi from source, follow [this tutorial](https://github.c
 When building CasADi from source the Ipopt solver is already included so the Building CasADi from sources section is the only one to follow from the tutorial mentioned above.
 
 ## Approach
-For specific information on how the trajectory optimization procedure is done please read [this thesis](docs/tfg.pdf).
+For specific information on how the trajectory optimization procedure is done please read [this thesis](https://hdl.handle.net/2117/405362).
 
 The most important advantage of this optimization algorithm is that it is not based on any geometrical approach, but it tries to find the optimal race line by taking into account the constraints imposed by the dynamic bicycle model. This way, apart from the actual race line, an optimal state for each point of the trajectory is obtained. This means that it also outputs **vx**, **vy** and **yawrate** profiles as well as **steering** and **throttle** commands profiles. 
 
@@ -49,7 +49,7 @@ FSG2019 track results:
   <img src="docs/tro_colorplot.png" width="320" />
 </p>
 
-For more results [read this](docs/tfg_oriolmartinez).
+For more results [read this](https://hdl.handle.net/2117/405362).
 
 ## Workflow
 This pkg includes three different nodes (or executables), which are thought to be run in the following order: 
